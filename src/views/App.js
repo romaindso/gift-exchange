@@ -1,5 +1,6 @@
 import appTemplate from "./app.hbs";
 import { ADD_FAMILY_MEMBER, REMOVE_FAMILY_MEMBER } from "../actions";
+import "./app.scss";
 
 export default class App {
   constructor(store) {

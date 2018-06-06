@@ -1,7 +1,6 @@
 import { createStore } from "redux";
 import reducer from "./reducers/index";
-import App from "./views/App";
-import "./app.scss";
+import App from "./views/app";
 
 const store = createStore(
   reducer,
