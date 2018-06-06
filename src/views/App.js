@@ -1,8 +1,6 @@
 import appTemplate from "./app.hbs";
 import { ADD_FAMILY_MEMBER, REMOVE_FAMILY_MEMBER } from "../actions";
 
-// const delete = (member) => console.log("menmner", member);
-
 export default class App {
   constructor(store) {
     this.store = store;
@@ -25,12 +23,12 @@ export default class App {
 
     const memberlist = document.querySelectorAll("#member-list li");
     memberlist.forEach(member => {
-      member.onclick = evt => {
+      member.addEventListener("click", evt => {
         this.store.dispatch({
           type: REMOVE_FAMILY_MEMBER,
           familyMember: evt.target.id
         });
-      };
+      });
     });
   }
 
