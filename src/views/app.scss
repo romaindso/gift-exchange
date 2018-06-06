@@ -16,6 +16,14 @@ label {
   color: #34495e;
 }
 
+.splash-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .member-registration-section,
 .member-list-section {
   margin-top: 40px;
@@ -29,6 +37,10 @@ label {
 
 .member-list-icon {
   text-align: center;
+}
+
+.pro-tip {
+  font-size: 0.8em;
 }
 
 /* TABLE */
@@ -53,6 +65,10 @@ label {
 
 /* ICONS */
 i.fas {
+  &.fa-gift {
+    color: lightcoral;
+  }
+
   &.fa-heart {
     color: deeppink;
   }
