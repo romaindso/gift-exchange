@@ -9,8 +9,8 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './dist',
-    stats: "errors-only"
+    contentBase: './dist'
+    // stats: "errors-only"
   },
   module: {
     rules: [
@@ -18,6 +18,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: "babel-loader"
+      },
+      {
+        test: /\.hbs$/,
+        loader: "handlebars-loader"
       },
       {
         test: /\.scss$/,
@@ -31,5 +35,8 @@ module.exports = {
   },
   stats: {
     colors: true
+  },
+  node: {
+    fs: 'empty'
   }
 };
