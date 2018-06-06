@@ -1,0 +1,14 @@
+<div class="member-list-section">
+  <ul id="member-list">
+    {{#each familyMembers}}
+    <li id={{this}}>{{this}}</li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="member-registration-section">
+  <form id="member-registration-form">
+    <input type="text" id="name" placeholder="Name" required />
+    <input type="submit" value="Add Member">
+  </form>
+</div>
