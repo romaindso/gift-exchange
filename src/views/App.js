@@ -22,12 +22,12 @@ export default class App {
       });
     });
 
-    const memberlist = document.querySelectorAll("#member-list li");
+    const memberlist = document.querySelectorAll("#member-list tr");
     memberlist.forEach(member => {
       member.addEventListener("click", evt => {
         this.store.dispatch({
           type: REMOVE_FAMILY_MEMBER,
-          familyMember: evt.target.id
+          familyMember: evt.target.className
         });
       });
     });

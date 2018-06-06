@@ -1,14 +1,41 @@
-<div class="member-list-section">
-  <ul id="member-list">
-    {{#each familyMembers}}
-    <li id={{this}}>{{this}}</li>
-    {{/each}}
-  </ul>
-</div>
+<div class="pure-g">
+  <div class="pure-u-1-3">
+  </div>
 
-<div class="member-registration-section">
-  <form id="member-registration-form">
-    <input type="text" id="name" placeholder="Name" required />
-    <input type="submit" value="Add Member">
-  </form>
+  <div class="pure-u-1-3">
+    <h1>Gift Exchange</h1>
+    <div class="member-registration-section">
+      <form class="pure-form" id="member-registration-form">
+        <fieldset>
+          <legend>Add a family member</legend>
+          <input type="text" id="name" placeholder="Name" required />
+          <button type="submit" class="pure-button pure-button-primary">Add member</button>
+        </fieldset>
+      </form>
+    </div>
+
+    {{#if familyMembers}}
+    <table class="pure-table pure-table-bordered member-list-section">
+      <thead>
+        <tr>
+          <th>Family Member</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="member-list">
+        {{#each familyMembers}}
+        <tr id={{this}}>
+          <td class={{this}}>{{this}}</td>
+          <td class={{this}}>
+            <button class="button-small pure-button">Remove</button>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{/if}}
+  </div>
+
+  <div class="pure-u-1-3">
+  </div>
 </div>
