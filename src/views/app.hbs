@@ -9,6 +9,7 @@
         <fieldset>
           <legend>Add a family member</legend>
           <input type="text" id="name" placeholder="Name" required />
+          <input type="text" id="spouse" placeholder="(Optional) Spouse" />
           <button type="submit" class="pure-button pure-button-primary">Add member</button>
         </fieldset>
       </form>
@@ -16,18 +17,17 @@
 
     {{#if familyMembers}}
     <table class="pure-table pure-table-bordered member-list-section">
-      <thead>
-        <tr>
-          <th>Family Member</th>
-          <th>Action</th>
-        </tr>
-      </thead>
       <tbody id="member-list">
         {{#each familyMembers}}
-        <tr id={{this}}>
-          <td class={{this}}>{{this}}</td>
-          <td class={{this}}>
-            <button class="button-small pure-button">Remove</button>
+        <tr id={{name}}>
+          <td>
+            <span class="member-list-name">{{name}}</span>
+            {{#if spouse}} (
+            <i class="fas fa-heart"></i> {{spouse}}) {{/if}}
+          </td>
+          </td>
+          <td class="member-list-icon">
+            <i class="fas fa-times"></i>
           </td>
         </tr>
         {{/each}}

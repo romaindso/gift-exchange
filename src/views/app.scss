@@ -16,11 +16,48 @@ label {
   color: #34495e;
 }
 
-.button-small {
-  font-size: 85%;
-}
-
 .member-registration-section,
 .member-list-section {
   margin-top: 40px;
+}
+
+.member-list-name {
+  color: #34495e;
+  text-transform: uppercase;
+  font-size: 1.2em;
+}
+
+.member-list-icon {
+  text-align: center;
+}
+
+/* TABLE */
+.pure-table {
+  width: 80%;
+  border-left: 0;
+  border-right: 0;
+
+  tr {
+    height: 60px;
+
+    &:nth-child(even) {
+      background-color: #f6f6f6;
+    }
+  }
+
+  td,
+  th {
+    border-left: 0;
+  }
+}
+
+/* ICONS */
+i.fas {
+  &.fa-heart {
+    color: deeppink;
+  }
+  &.fa-times {
+    color: red;
+    cursor: pointer;
+  }
 }

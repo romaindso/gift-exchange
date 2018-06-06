@@ -16,18 +16,42 @@ export default class App {
     form.addEventListener("submit", evt => {
       evt.preventDefault();
 
-      this.store.dispatch({
-        type: ADD_FAMILY_MEMBER,
-        familyMember: form.name.value
-      });
+      if (form.name.value && form.spouse.value) {
+        this.store.dispatch({
+          type: ADD_FAMILY_MEMBER,
+          familyMember: {
+            name: form.name.value,
+            spouse: form.spouse.value
+          }
+        });
+        this.store.dispatch({
+          type: ADD_FAMILY_MEMBER,
+          familyMember: {
+            name: form.spouse.value,
+            spouse: form.name.value
+          }
+        });
+      } else {
+        this.store.dispatch({
+          type: ADD_FAMILY_MEMBER,
+          familyMember: {
+            name: form.name.value,
+            spouse: form.spouse.value
+          }
+        });
+      }
     });
 
-    const memberlist = document.querySelectorAll("#member-list tr");
+    const memberlist = document.querySelectorAll(
+      "#member-list .member-list-icon"
+    );
     memberlist.forEach(member => {
       member.addEventListener("click", evt => {
         this.store.dispatch({
           type: REMOVE_FAMILY_MEMBER,
-          familyMember: evt.target.className
+          familyMember: {
+            name: evt.target.className
+          }
         });
       });
     });
