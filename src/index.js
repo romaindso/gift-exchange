@@ -1,5 +1,6 @@
+import App from './App';
 import './app.scss';
 
-const name = 'world';
-const message = `Hello ${name}!`;
-console.log(message);
+document.addEventListener("DOMContentLoaded", function () {
+  new App();
+});
