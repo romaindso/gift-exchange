@@ -12,31 +12,47 @@
   </div>
 
   <div class="pure-u-1-3">
-    <section class="member-registration-section">
-      <form class="pure-form" id="member-registration-form">
-        <fieldset>
-          <legend>Add a family member</legend>
-          <input type="text" id="name" placeholder="Name" required />
-          <input type="text" id="spouse" placeholder="(Optional) Spouse" />
-          <button type="submit" class="pure-button pure-button-primary">Add member</button>
-        </fieldset>
-      </form>
-    </section>
+    {{#unless isDrawDone}}
+      <section class="member-registration-section">
+        <form class="pure-form" id="member-registration-form">
+          <fieldset>
+            <legend>Add a family member</legend>
+            <input class="pure-input-1-4" type="text" id="name" placeholder="Name" required />
+            <input type="text" id="spouse" placeholder="(Optional) Spouse" />
+            <button type="submit" class="pure-button pure-button-primary">Add member</button>
+          </fieldset>
+        </form>
+      </section>
 
-    <section class="shuffle-section">
-      <button class="pure-button button-xlarge button-shuffle">Shuffle
-        <i class="fas fa-random"></i>
-      </button>
-    </section>
+      <section class="shuffle-section">
+        <button class="pure-button button-xlarge button-shuffle">
+          Shuffle
+          <i class="fas fa-random"></i>
+        </button>
+      </section>
 
-    <section class="pro-tip-section">
-      <p>No members found, add some folks first.
-        <br/>
-        <span class="pro-tip">If you're alone you can still buy a
-          <i class="fas fa-gift"></i> to yourself
-        </span>
-      </p>
-    </section>
+      <section class="pro-tip-section">
+        <p>No members found, add some folks first.
+          <br/>
+          <span class="pro-tip">If you're alone you can still buy a
+            <i class="fas fa-gift"></i> to yourself
+          </span>
+        </p>
+      </section>
+    {{/unless}} 
+
+    {{#if isDrawDone}}
+      <section class="actions-section">
+        <button class="pure-button button-xlarge button-shuffle">
+          Shuffle
+          <i class="fas fa-random"></i>
+        </button>
+          <button class="pure-button button-xlarge button-restart">
+            Restart
+            <i class="fas fa-undo"></i>
+          </button>
+      </section>
+     {{/if}}
   </div>
 
   <div class="pure-u-1-3">
@@ -48,7 +64,7 @@
   </div>
 
   <div class="pure-u-1-3">
-    {{#if familyMembers}}
+    {{#if familyMembers}} 
       {{#unless isDrawDone}}
         <section class="member-list-section">
           <h3>Family Members</h3>
@@ -63,15 +79,15 @@
                   {{/if}}
                 </td>
                 </td>
-                <td class="member-list-icon">
-                  <i class="fas fa-times" data-name={{name}}></i>
+                <td class="member-list-delete-icon">
+                  <i class="fas fa-times" data-name={{name}} data-spouse={{spouse}}></i>
                 </td>
               </tr>
               {{/each}}
             </tbody>
           </table>
         </section>
-      {{/unless}}
+      {{/unless}} 
 
       {{#if isDrawDone}}
         <section class="results-section">
@@ -89,7 +105,7 @@
             </tbody>
           </table>
         </section>
-      {{/if}}
+      {{/if}} 
     {{/if}}
   </div>
 

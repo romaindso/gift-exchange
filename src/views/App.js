@@ -2,7 +2,8 @@ import appTemplate from "./app.hbs";
 import {
   addFamilyMember,
   removeFamilyMember,
-  shuffleFamilyMembers
+  shuffleFamilyMembers,
+  resetState
 } from "../actions";
 import "./app.scss";
 
@@ -17,39 +18,42 @@ export default class App {
 
   bindEventListeners() {
     const form = document.querySelector("#member-registration-form");
-    form.addEventListener("submit", evt => {
-      evt.preventDefault();
+    if (form) {
+      form.addEventListener("submit", evt => {
+        evt.preventDefault();
 
-      if (form.name.value && form.spouse.value) {
-        this.store.dispatch(
-          addFamilyMember({
-            name: form.name.value,
-            spouse: form.spouse.value
-          })
-        );
-        this.store.dispatch(
-          addFamilyMember({
-            name: form.spouse.value,
-            spouse: form.name.value
-          })
-        );
-      } else {
-        this.store.dispatch(
-          addFamilyMember({
-            name: form.name.value,
-            spouse: form.spouse.value
-          })
-        );
-      }
-    });
+        if (form.name.value && form.spouse.value) {
+          this.store.dispatch(
+            addFamilyMember({
+              name: form.name.value,
+              spouse: form.spouse.value
+            })
+          );
+          this.store.dispatch(
+            addFamilyMember({
+              name: form.spouse.value,
+              spouse: form.name.value
+            })
+          );
+        } else {
+          this.store.dispatch(
+            addFamilyMember({
+              name: form.name.value,
+              spouse: ""
+            })
+          );
+        }
+      });
+    }
 
     const memberlist = document.querySelectorAll(
-      "#member-list .member-list-icon"
+      ".member-list-delete-icon .fa-times"
     );
     memberlist.forEach(member => {
       member.addEventListener("click", evt => {
         const name = evt.target.getAttribute("data-name");
-        this.store.dispatch(removeFamilyMember({ name }));
+        const spouse = evt.target.getAttribute("data-spouse");
+        this.store.dispatch(removeFamilyMember({ name, spouse }));
       });
     });
 
@@ -57,6 +61,13 @@ export default class App {
     shuffleButton.addEventListener("click", evt => {
       this.store.dispatch(shuffleFamilyMembers());
     });
+
+    const restartButton = document.querySelector(".button-restart");
+    if (restartButton) {
+      restartButton.addEventListener("click", evt => {
+        this.store.dispatch(resetState());
+      });
+    }
   }
 
   render() {
