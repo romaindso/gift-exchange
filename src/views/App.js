@@ -1,5 +1,9 @@
 import appTemplate from "./app.hbs";
-import { ADD_FAMILY_MEMBER, REMOVE_FAMILY_MEMBER } from "../actions";
+import {
+  addFamilyMember,
+  removeFamilyMember,
+  shuffleFamilyMembers
+} from "../actions";
 import "./app.scss";
 
 export default class App {
@@ -17,28 +21,25 @@ export default class App {
       evt.preventDefault();
 
       if (form.name.value && form.spouse.value) {
-        this.store.dispatch({
-          type: ADD_FAMILY_MEMBER,
-          familyMember: {
+        this.store.dispatch(
+          addFamilyMember({
             name: form.name.value,
             spouse: form.spouse.value
-          }
-        });
-        this.store.dispatch({
-          type: ADD_FAMILY_MEMBER,
-          familyMember: {
+          })
+        );
+        this.store.dispatch(
+          addFamilyMember({
             name: form.spouse.value,
             spouse: form.name.value
-          }
-        });
+          })
+        );
       } else {
-        this.store.dispatch({
-          type: ADD_FAMILY_MEMBER,
-          familyMember: {
+        this.store.dispatch(
+          addFamilyMember({
             name: form.name.value,
             spouse: form.spouse.value
-          }
-        });
+          })
+        );
       }
     });
 
@@ -47,13 +48,17 @@ export default class App {
     );
     memberlist.forEach(member => {
       member.addEventListener("click", evt => {
-        this.store.dispatch({
-          type: REMOVE_FAMILY_MEMBER,
-          familyMember: {
+        this.store.dispatch(
+          removeFamilyMember({
             name: evt.target.className
-          }
-        });
+          })
+        );
       });
+    });
+
+    const shuffleButton = document.querySelector(".button-shuffle");
+    shuffleButton.addEventListener("click", evt => {
+      this.store.dispatch(shuffleFamilyMembers());
     });
   }
 
