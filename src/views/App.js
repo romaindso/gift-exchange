@@ -48,11 +48,8 @@ export default class App {
     );
     memberlist.forEach(member => {
       member.addEventListener("click", evt => {
-        this.store.dispatch(
-          removeFamilyMember({
-            name: evt.target.className
-          })
-        );
+        const name = evt.target.getAttribute("data-name");
+        this.store.dispatch(removeFamilyMember({ name }));
       });
     });
 
