@@ -1,7 +1,8 @@
 import {
   ADD_FAMILY_MEMBER,
   REMOVE_FAMILY_MEMBER,
-  SHUFFLE_FAMILY_MEMBERS
+  SHUFFLE_FAMILY_MEMBERS,
+  RESET_STATE
 } from "../actions";
 
 const initialState = {
@@ -13,26 +14,19 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FAMILY_MEMBER: {
       return {
-        familyMembers: [...state.familyMembers, action.familyMember],
-        isDrawDone: false
+        ...state,
+        familyMembers: [...state.familyMembers, action.familyMember]
       };
     }
 
     case REMOVE_FAMILY_MEMBER: {
       const newState = {
-        familyMembers: state.familyMembers.map(member => {
-          return {
-            name: member.name,
-            spouse: member.spouse,
-            receiver: member.receiver
-          };
-        }),
-        isDrawDone: false
-      };
-      const memberIndexToRemove = newState.familyMembers.findIndex(
-        el => el.name === action.familyMember.name
-      );
-      newState.familyMembers.splice(memberIndexToRemove, 1);
+        ...state,
+        familyMembers: state.familyMembers.filter(member => {
+          return member.name !== action.familyMember.name
+        })
+      }
+
       return newState;
     }
 
@@ -40,19 +34,21 @@ const reducer = (state = initialState, action) => {
       const newState = {
         familyMembers: state.familyMembers.map(member => {
           return {
-            name: member.name,
-            spouse: member.spouse,
-            receiver: member.receiver
+            ...member
           };
         }),
-        isDrawDone: true
+        isDrawDone: false
       };
 
       newState.familyMembers.forEach((member, index) => {
-        console.log(findReceiver(member, newState.familyMembers));
+        findReceiver(member, newState.familyMembers);
       });
 
       return newState;
+    }
+
+    case RESET_STATE: {
+      return initialState;
     }
 
     default:
