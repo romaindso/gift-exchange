@@ -25,6 +25,7 @@ label {
   align-items: center;
 }
 
+/* SECTIONS */
 .member-registration-section,
 .member-list-section {
   margin-top: 40px;
@@ -40,8 +41,16 @@ label {
   text-align: center;
 }
 
-.pro-tip {
-  font-size: 0.8em;
+.pro-tip-section {
+  text-align: center;
+  .pro-tip {
+    font-size: 0.8em;
+  }
+}
+
+.shuffle-section {
+  margin-top: 20px;
+  text-align: center;
 }
 
 /* BUTTONS */

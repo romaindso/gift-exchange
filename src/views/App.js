@@ -63,8 +63,10 @@ export default class App {
     const state = this.store.getState();
 
     var context = {
-      familyMembers: state.familyMembers
+      familyMembers: state.familyMembers,
+      isDrawDone: state.isDrawDone
     };
+
     var html = appTemplate(context);
     this.app.innerHTML = html;
 
