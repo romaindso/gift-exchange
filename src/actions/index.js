@@ -1,5 +1,6 @@
 export const ADD_FAMILY_MEMBER = "ADD_FAMILY_MEMBER";
 export const REMOVE_FAMILY_MEMBER = "REMOVE_FAMILY_MEMBER";
+export const SHUFFLE_FAMILY_MEMBERS = "SHUFFLE_FAMILY_MEMBERS";
 
 export const addFamilyMember = familyMember => {
   return {
@@ -18,5 +19,11 @@ export const removeFamilyMember = familyMember => {
       name: familyMember.name,
       spouse: familyMember.spouse
     }
+  };
+};
+
+export const shuffleFamilyMembers = () => {
+  return {
+    type: SHUFFLE_FAMILY_MEMBERS
   };
 };
