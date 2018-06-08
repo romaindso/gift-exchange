@@ -5,12 +5,12 @@ import {
   RESET_STATE
 } from "../actions/actionTypes";
 
-const initialState = {
+export const INITIAL_STATE = {
   familyMembers: [],
   isDrawDone: false
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_FAMILY_MEMBER: {
       const newfamilyMembers = [...state.familyMembers, action.familyMember]
@@ -19,11 +19,7 @@ export const reducer = (state = initialState, action) => {
       const membersWithSpouse = newfamilyMembers.filter(member => {
         return member.spouse
       }).length;
-
-      console.log('familyLength', familyLength);
-      console.log('totalCouples', membersWithSpouse);
       const isDrawPossible = checkDrawValidity(familyLength, membersWithSpouse);
-      console.log('isDrawnPossible', isDrawPossible);
 
       return {
         ...state,
@@ -32,7 +28,16 @@ export const reducer = (state = initialState, action) => {
     }
 
     case REMOVE_FAMILY_MEMBER: {
-      let familyMembersReduced = state.familyMembers.reduce((total, member) => {
+      const newState = {
+        ...state,
+        familyMembers: state.familyMembers.map(member => {
+          return {
+            ...member
+          };
+        }),
+      };
+
+      let familyMembersReduced = newState.familyMembers.reduce((total, member) => {
         // Delete spouse for remaining couple member
         if (action.familyMember.spouse === member.name) {
           member.spouse = "";
@@ -44,11 +49,7 @@ export const reducer = (state = initialState, action) => {
         return total;
       }, []);
 
-      const newState = {
-        ...state,
-        familyMembers: familyMembersReduced
-      }
-
+      newState.familyMembers = familyMembersReduced;
       return newState;
     }
 
@@ -72,7 +73,7 @@ export const reducer = (state = initialState, action) => {
     }
 
     case RESET_STATE: {
-      return initialState;
+      return INITIAL_STATE;
     }
 
     default:
@@ -80,6 +81,7 @@ export const reducer = (state = initialState, action) => {
   }
 };
 
+// Could be improved to prevent "maximum call stack exceeded" with recursion
 const findReceiver = (member, familyMembers) => {
   const receiverIndex = Math.floor(Math.random() * familyMembers.length);
   if (
@@ -97,7 +99,7 @@ const findReceiver = (member, familyMembers) => {
 
 const checkDrawValidity = (familyLength, membersWithSpouse) => {
   if (familyLength <= 1 ||
-    membersWithSpouse === 2 && familyLength === 2 ||
+    membersWithSpouse === familyLength === 2 ||
     familyLength === 3 && membersWithSpouse === 2
   ) {
     return false

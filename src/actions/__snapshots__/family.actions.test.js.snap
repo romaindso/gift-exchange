@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Family actions ADD_FAMILY_MEMBER 1`] = `
+Object {
+  "familyMember": Object {
+    "name": "Romain",
+    "spouse": "Amélie",
+  },
+  "type": "ADD_FAMILY_MEMBER",
+}
+`;
+
+exports[`Family actions REMOVE_FAMILY_MEMBER 1`] = `
+Object {
+  "familyMember": Object {
+    "name": "Romain",
+    "spouse": "Amélie",
+  },
+  "type": "REMOVE_FAMILY_MEMBER",
+}
+`;
+
+exports[`Family actions RESET_STATE 1`] = `
+Object {
+  "type": "RESET_STATE",
+}
+`;
+
+exports[`Family actions SHUFFLE_FAMILY_MEMBERS 1`] = `
+Object {
+  "type": "SHUFFLE_FAMILY_MEMBERS",
+}
+`;
