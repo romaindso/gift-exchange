@@ -38,5 +38,10 @@ module.exports = {
   },
   node: {
     fs: 'empty'
+  },
+  resolve: {
+    alias: {
+      handlebars: 'handlebars/dist/handlebars.min.js'
+    }
   }
 };
