@@ -6,16 +6,19 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
   },
   "author": "Romain Durand Saint Omer",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-jest": "^23.0.1",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^0.28.11",
+    "jest": "^23.1.0",
     "node-sass": "^4.9.0",
     "path": "^0.12.7",
     "sass-loader": "^7.0.3",
