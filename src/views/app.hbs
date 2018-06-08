@@ -33,14 +33,16 @@
       </section>
       {{/if}}
 
-      <section class="pro-tip-section">
-        <p>No members found, add some folks first.
-          <br/>
-          <span class="pro-tip">If you're alone you can still buy a
-            <i class="fas fa-gift"></i> to yourself
-          </span>
-        </p>
-      </section>
+      {{#unless isDrawValid}}
+        <section class="pro-tip-section">
+          <p>Draw isn't possible, try to add some folks.
+            <br/>
+            <span class="pro-tip">If you're alone you can still buy a
+              <i class="fas fa-gift"></i> to yourself
+            </span>
+          </p>
+        </section>
+      {{/unless}} 
     {{/unless}} 
 
     {{#if isDrawDone}}
