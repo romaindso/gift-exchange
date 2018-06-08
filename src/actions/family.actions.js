@@ -2,7 +2,8 @@ import {
   ADD_FAMILY_MEMBER,
   REMOVE_FAMILY_MEMBER,
   SHUFFLE_FAMILY_MEMBERS,
-  RESET_STATE
+  RESET_STATE,
+  CHECK_DRAW
 } from './actionTypes';
 
 export const addFamilyMember = familyMember => {
@@ -28,6 +29,12 @@ export const removeFamilyMember = familyMember => {
 export const shuffleFamilyMembers = () => {
   return {
     type: SHUFFLE_FAMILY_MEMBERS
+  };
+};
+
+export const checkDraw = () => {
+  return {
+    type: CHECK_DRAW
   };
 };
 

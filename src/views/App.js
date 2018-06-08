@@ -3,6 +3,7 @@ import {
   addFamilyMember,
   removeFamilyMember,
   shuffleFamilyMembers,
+  checkDraw,
   resetState
 } from "../actions/family.actions";
 import "./app.scss";
@@ -43,6 +44,7 @@ export default class App {
             })
           );
         }
+        this.store.dispatch(checkDraw());
       });
     }
 
@@ -54,13 +56,16 @@ export default class App {
         const name = evt.target.getAttribute("data-name");
         const spouse = evt.target.getAttribute("data-spouse");
         this.store.dispatch(removeFamilyMember({ name, spouse }));
+        this.store.dispatch(checkDraw());
       });
     });
 
     const shuffleButton = document.querySelector(".button-shuffle");
-    shuffleButton.addEventListener("click", evt => {
-      this.store.dispatch(shuffleFamilyMembers());
-    });
+    if (shuffleButton) {
+      shuffleButton.addEventListener("click", evt => {
+        this.store.dispatch(shuffleFamilyMembers());
+      });
+    }
 
     const restartButton = document.querySelector(".button-restart");
     if (restartButton) {
@@ -75,6 +80,7 @@ export default class App {
 
     var context = {
       familyMembers: state.familyMembers,
+      isDrawValid: state.isDrawValid,
       isDrawDone: state.isDrawDone
     };
 

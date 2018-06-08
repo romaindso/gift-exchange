@@ -2,11 +2,13 @@ import {
   ADD_FAMILY_MEMBER,
   REMOVE_FAMILY_MEMBER,
   SHUFFLE_FAMILY_MEMBERS,
+  CHECK_DRAW,
   RESET_STATE
 } from "../actions/actionTypes";
 
 export const INITIAL_STATE = {
   familyMembers: [],
+  isDrawValid: false,
   isDrawDone: false
 };
 
@@ -14,12 +16,6 @@ export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_FAMILY_MEMBER: {
       const newfamilyMembers = [...state.familyMembers, action.familyMember]
-
-      const familyLength = newfamilyMembers.length;
-      const membersWithSpouse = newfamilyMembers.filter(member => {
-        return member.spouse
-      }).length;
-      const isDrawPossible = checkDrawValidity(familyLength, membersWithSpouse);
 
       return {
         ...state,
@@ -53,8 +49,33 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return newState;
     }
 
+    case CHECK_DRAW: {
+      // const newState = {
+      //   ...state,
+      //   familyMembers: state.familyMembers.map(member => {
+      //     return {
+      //       ...member
+      //     };
+      //   }),
+      // };
+
+      // const newfamilyMembers = [...state.familyMembers]
+      const familyLength = state.familyMembers.length;
+      const membersWithSpouse = state.familyMembers.filter(member => {
+        return member.spouse
+      }).length;
+
+      //newState.isDrawValid = 
+
+      return {
+        ...state,
+        isDrawValid: isDrawValid(familyLength, membersWithSpouse)
+      };
+    }
+
     case SHUFFLE_FAMILY_MEMBERS: {
       const newState = {
+        ...state,
         familyMembers: state.familyMembers.map(member => {
           // Clean previous shuffle
           const { receiver, isAlreadyAGiver, ...rest } = member;
@@ -97,9 +118,9 @@ const findReceiver = (member, familyMembers) => {
   }
 };
 
-const checkDrawValidity = (familyLength, membersWithSpouse) => {
+const isDrawValid = (familyLength, membersWithSpouse) => {
   if (familyLength <= 1 ||
-    membersWithSpouse === familyLength === 2 ||
+    membersWithSpouse === 2 && familyLength === 2 ||
     familyLength === 3 && membersWithSpouse === 2
   ) {
     return false

@@ -3,6 +3,7 @@ import {
   ADD_FAMILY_MEMBER,
   REMOVE_FAMILY_MEMBER,
   SHUFFLE_FAMILY_MEMBERS,
+  CHECK_DRAW,
   RESET_STATE
 } from "../actions/actionTypes";
 import deepFreeze from 'deep-freeze';
@@ -32,6 +33,7 @@ describe("Family reducer", () => {
         name: "Romain",
         spouse: "Amélie",
       }],
+      isDrawValid: false,
       isDrawDone: false,
     });
   });
@@ -56,6 +58,7 @@ describe("Family reducer", () => {
         name: "Tom",
         spouse: ""
       }],
+      isDrawValid: false,
       isDrawDone: false
     }
 
@@ -70,6 +73,7 @@ describe("Family reducer", () => {
         name: "Tom",
         spouse: ""
       }],
+      isDrawValid: false,
       isDrawDone: false,
     });
   });
@@ -84,6 +88,7 @@ describe("Family reducer", () => {
         name: "Clara",
         spouse: ""
       }],
+      isDrawValid: true,
       isDrawDone: false
     }
 
@@ -105,6 +110,7 @@ describe("Family reducer", () => {
         receiver: "Tom",
         isAlreadyAGiver: true
       }],
+      isDrawValid: true,
       isDrawDone: true,
     });
   });

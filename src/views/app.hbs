@@ -24,12 +24,14 @@
         </form>
       </section>
 
-      <section class="shuffle-section">
-        <button class="pure-button button-xlarge button-shuffle">
-          Shuffle
-          <i class="fas fa-random"></i>
-        </button>
+      {{#if isDrawValid}}
+        <section class="shuffle-section">
+          <button class="pure-button button-xlarge button-shuffle">
+            Shuffle
+            <i class="fas fa-random"></i>
+          </button>
       </section>
+      {{/if}}
 
       <section class="pro-tip-section">
         <p>No members found, add some folks first.
