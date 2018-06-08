@@ -3,7 +3,7 @@ import {
   REMOVE_FAMILY_MEMBER,
   SHUFFLE_FAMILY_MEMBERS,
   RESET_STATE
-} from "../actions";
+} from "../actions/family.action";
 
 const initialState = {
   familyMembers: [],
@@ -13,9 +13,21 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FAMILY_MEMBER: {
+      const newfamilyMembers = [...state.familyMembers, action.familyMember]
+
+      const familyLength = newfamilyMembers.length;
+      const membersWithSpouse = newfamilyMembers.filter(member => {
+        return member.spouse
+      }).length;
+
+      console.log('familyLength', familyLength);
+      console.log('totalCouples', membersWithSpouse);
+      const isDrawPossible = checkDrawValidity(familyLength, membersWithSpouse);
+      console.log('isDrawnPossible', isDrawPossible);
+
       return {
         ...state,
-        familyMembers: [...state.familyMembers, action.familyMember]
+        familyMembers: newfamilyMembers
       };
     }
 
@@ -43,11 +55,13 @@ const reducer = (state = initialState, action) => {
     case SHUFFLE_FAMILY_MEMBERS: {
       const newState = {
         familyMembers: state.familyMembers.map(member => {
+          // Clean previous shuffle
+          const { receiver, isAlreadyAGiver, ...rest } = member;
           return {
-            ...member
+            ...rest
           };
         }),
-        isDrawDone: false
+        isDrawDone: true
       };
 
       newState.familyMembers.forEach((member, index) => {
@@ -80,5 +94,16 @@ const findReceiver = (member, familyMembers) => {
     return member;
   }
 };
+
+const checkDrawValidity = (familyLength, membersWithSpouse) => {
+  if (familyLength <= 1 ||
+    membersWithSpouse === 2 && familyLength === 2 ||
+    familyLength === 3 && membersWithSpouse === 2
+  ) {
+    return false
+  }
+
+  return true;
+}
 
 export default reducer;
