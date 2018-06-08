@@ -1,0 +1,15 @@
+<section class="results-section">
+  <h3>Gift draw results</h3>
+  <table class="pure-table pure-table-bordered">
+    <tbody id="result-list">
+      {{#each familyMembers}}
+      <tr id={{name}}>
+        <td>
+          <span class="member-list-name">{{name}}</span>
+          <i class="fas fa-gift"></i> {{receiver}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</section>

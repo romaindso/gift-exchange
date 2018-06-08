@@ -1,0 +1,21 @@
+<section class="member-list-section">
+  <h3>Family Members</h3>
+  <table class="pure-table pure-table-bordered">
+    <tbody id="member-list">
+      {{#each familyMembers}}
+      <tr id={{name}}>
+        <td>
+          <span class="member-list-name">{{name}}</span>
+          {{#if spouse}} 
+            (<i class="fas fa-heart"></i> {{spouse}}) 
+          {{/if}}
+        </td>
+        </td>
+        <td class="member-list-delete-icon">
+          <i class="fas fa-times" data-name={{name}} data-spouse={{spouse}}></i>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</section>

@@ -1,4 +1,3 @@
-import appTemplate from "./app.hbs";
 import {
   addFamilyMember,
   removeFamilyMember,
@@ -7,6 +6,14 @@ import {
   resetState
 } from "../actions/family.actions";
 import "./app.scss";
+import Handlebars from 'handlebars';
+import appTemplate from "./templates/app.hbs";
+import registrationSection from './templates/registrationSection.hbs';
+import shuffleSection from './templates/shuffleSection.hbs';
+import tipSection from './templates/tipSection.hbs';
+import actionsSection from './templates/actionsSection.hbs';
+import memberListSection from './templates/memberListSection.hbs';
+import resultsSection from './templates/resultsSection.hbs';
 
 export default class App {
   constructor(store) {
@@ -92,14 +99,20 @@ export default class App {
 
   render() {
     const state = this.store.getState();
-
-    var context = {
+    const context = {
       familyMembers: state.familyMembers,
       isDrawValid: state.isDrawValid,
       isDrawDone: state.isDrawDone
     };
 
-    var html = appTemplate(context);
+    Handlebars.registerPartial('registrationSection', '{{name}}');
+    Handlebars.registerPartial('shuffleSection', '{{name}}');
+    Handlebars.registerPartial('tipSection', '{{name}}');
+    Handlebars.registerPartial('actionsSection', '{{name}}');
+    Handlebars.registerPartial('memberListSection', '{{name}}');
+    Handlebars.registerPartial('resultsSection', '{{name}}');
+
+    const html = appTemplate(context);
     this.app.innerHTML = html;
 
     this.bindEventListeners();
