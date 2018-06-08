@@ -6,8 +6,11 @@ https://romaindso.github.io/gift-exchange/
 ## Features
 
 * Vanilla JS only
+* Webpack / Babel because it's 2018
+* Handlebars as template engine
 * Redux for state management
-* PureCSS for design
+* SASS to unlock the power of CSS
+* PureCSS to get a nice design
 * Jest for testing
 
 
