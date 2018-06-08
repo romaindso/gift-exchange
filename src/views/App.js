@@ -4,7 +4,7 @@ import {
   removeFamilyMember,
   shuffleFamilyMembers,
   resetState
-} from "../actions/family.action";
+} from "../actions/family.actions";
 import "./app.scss";
 
 export default class App {

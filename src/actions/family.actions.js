@@ -1,7 +1,9 @@
-export const ADD_FAMILY_MEMBER = "ADD_FAMILY_MEMBER";
-export const REMOVE_FAMILY_MEMBER = "REMOVE_FAMILY_MEMBER";
-export const SHUFFLE_FAMILY_MEMBERS = "SHUFFLE_FAMILY_MEMBERS";
-export const RESET_STATE = "RESET_STATE";
+import {
+  ADD_FAMILY_MEMBER,
+  REMOVE_FAMILY_MEMBER,
+  SHUFFLE_FAMILY_MEMBERS,
+  RESET_STATE
+} from './actionTypes';
 
 export const addFamilyMember = familyMember => {
   return {

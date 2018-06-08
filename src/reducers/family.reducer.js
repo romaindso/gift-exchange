@@ -3,14 +3,14 @@ import {
   REMOVE_FAMILY_MEMBER,
   SHUFFLE_FAMILY_MEMBERS,
   RESET_STATE
-} from "../actions/family.action";
+} from "../actions/actionTypes";
 
 const initialState = {
   familyMembers: [],
   isDrawDone: false
 };
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FAMILY_MEMBER: {
       const newfamilyMembers = [...state.familyMembers, action.familyMember]
