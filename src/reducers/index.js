@@ -20,11 +20,21 @@ const reducer = (state = initialState, action) => {
     }
 
     case REMOVE_FAMILY_MEMBER: {
+      let familyMembersReduced = state.familyMembers.reduce((total, member) => {
+        // Delete spouse for remaining couple member
+        if (action.familyMember.spouse === member.name) {
+          member.spouse = "";
+        }
+        // Keep only other members
+        if (member.name !== action.familyMember.name) {
+          total.push(member);
+        }
+        return total;
+      }, []);
+
       const newState = {
         ...state,
-        familyMembers: state.familyMembers.filter(member => {
-          return member.name !== action.familyMember.name
-        })
+        familyMembers: familyMembersReduced
       }
 
       return newState;
