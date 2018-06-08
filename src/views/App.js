@@ -18,6 +18,13 @@ export default class App {
   }
 
   bindEventListeners() {
+    this.setUpAddMemberButton();
+    this.setUpRemoveMemberButtons();
+    this.setUpShuffleButton();
+    this.setUpRestartButton();
+  }
+
+  setUpAddMemberButton() {
     const form = document.querySelector("#member-registration-form");
     if (form) {
       form.addEventListener("submit", evt => {
@@ -47,26 +54,34 @@ export default class App {
         this.store.dispatch(checkDraw());
       });
     }
+  }
 
+  setUpRemoveMemberButtons() {
     const memberlist = document.querySelectorAll(
       ".member-list-delete-icon .fa-times"
     );
-    memberlist.forEach(member => {
-      member.addEventListener("click", evt => {
-        const name = evt.target.getAttribute("data-name");
-        const spouse = evt.target.getAttribute("data-spouse");
-        this.store.dispatch(removeFamilyMember({ name, spouse }));
-        this.store.dispatch(checkDraw());
+    if (memberlist) {
+      memberlist.forEach(member => {
+        member.addEventListener("click", evt => {
+          const name = evt.target.getAttribute("data-name");
+          const spouse = evt.target.getAttribute("data-spouse");
+          this.store.dispatch(removeFamilyMember({ name, spouse }));
+          this.store.dispatch(checkDraw());
+        });
       });
-    });
+    }
+  }
 
+  setUpShuffleButton() {
     const shuffleButton = document.querySelector(".button-shuffle");
     if (shuffleButton) {
       shuffleButton.addEventListener("click", evt => {
         this.store.dispatch(shuffleFamilyMembers());
       });
     }
+  }
 
+  setUpRestartButton() {
     const restartButton = document.querySelector(".button-restart");
     if (restartButton) {
       restartButton.addEventListener("click", evt => {
