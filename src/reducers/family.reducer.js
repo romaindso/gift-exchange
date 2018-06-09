@@ -50,22 +50,10 @@ export const reducer = (state = INITIAL_STATE, action) => {
     }
 
     case CHECK_DRAW: {
-      // const newState = {
-      //   ...state,
-      //   familyMembers: state.familyMembers.map(member => {
-      //     return {
-      //       ...member
-      //     };
-      //   }),
-      // };
-
-      // const newfamilyMembers = [...state.familyMembers]
       const familyLength = state.familyMembers.length;
       const membersWithSpouse = state.familyMembers.filter(member => {
         return member.spouse
       }).length;
-
-      //newState.isDrawValid = 
 
       return {
         ...state,

@@ -115,6 +115,72 @@ describe("Family reducer", () => {
     });
   });
 
+  test("should update the state field isDrawValid with true if draw is possible", () => {
+    const state = {
+      familyMembers: [{
+        name: "Tom",
+        spouse: ""
+      },
+      {
+        name: "Clara",
+        spouse: ""
+      }],
+      isDrawValid: false,
+      isDrawDone: false
+    };
+
+    deepFreeze(state);
+    const result = reducer(state, {
+      type: CHECK_DRAW
+    });
+
+    expect(result).toEqual({
+      familyMembers: [{
+        name: "Tom",
+        spouse: ""
+      },
+      {
+        name: "Clara",
+        spouse: ""
+      }],
+      isDrawValid: true,
+      isDrawDone: false
+    })
+  });
+
+  test("should update the state field isDrawValid with false if draw is not possible", () => {
+    const state = {
+      familyMembers: [{
+        name: "Tom",
+        spouse: "Clara"
+      },
+      {
+        name: "Clara",
+        spouse: "Tom"
+      }],
+      isDrawValid: false,
+      isDrawDone: false
+    };
+
+    deepFreeze(state);
+    const result = reducer(state, {
+      type: CHECK_DRAW
+    });
+
+    expect(result).toEqual({
+      familyMembers: [{
+        name: "Tom",
+        spouse: "Clara"
+      },
+      {
+        name: "Clara",
+        spouse: "Tom"
+      }],
+      isDrawValid: false,
+      isDrawDone: false
+    })
+  });
+
   test("should reset the state", () => {
     deepFreeze(INITIAL_STATE);
     const result = reducer(INITIAL_STATE, {
