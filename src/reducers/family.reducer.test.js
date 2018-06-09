@@ -1,4 +1,4 @@
-import { reducer, INITIAL_STATE } from './family.reducer';
+import { reducer, INITIAL_STATE, findReceiver, isDrawValid } from './family.reducer';
 import {
   ADD_FAMILY_MEMBER,
   REMOVE_FAMILY_MEMBER,
@@ -189,4 +189,45 @@ describe("Family reducer", () => {
 
     expect(result).toEqual(INITIAL_STATE);
   });
+
+  test("findReceiver", () => {
+    const familyMembers = [{
+      name: "Tom",
+      spouse: ""
+    },
+    {
+      name: "Clara",
+      spouse: ""
+    }];
+
+    familyMembers.forEach(member => {
+      findReceiver(member, familyMembers);
+    });
+
+    expect(familyMembers).toEqual([
+      {
+        name: "Tom",
+        spouse: "",
+        receiver: "Clara",
+        isAlreadyAGiver: true
+      },
+      {
+        name: "Clara",
+        spouse: "",
+        receiver: "Tom",
+        isAlreadyAGiver: true
+      }
+    ])
+  });
+
+  test("isDrawValid", () => {
+    expect(isDrawValid(2, 0)).toBeTruthy();
+    expect(isDrawValid(4, 4)).toBeTruthy();
+    expect(isDrawValid(4, 0)).toBeTruthy();
+
+    expect(isDrawValid(2, 2)).toBeFalsy();
+    expect(isDrawValid(3, 2)).toBeFalsy();
+    expect(isDrawValid(1, 0)).toBeFalsy();
+    expect(isDrawValid(1, 1)).toBeFalsy();
+  })
 });

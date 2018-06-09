@@ -15,11 +15,9 @@ export const INITIAL_STATE = {
 export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_FAMILY_MEMBER: {
-      const newfamilyMembers = [...state.familyMembers, action.familyMember]
-
       return {
         ...state,
-        familyMembers: newfamilyMembers
+        familyMembers: [...state.familyMembers, action.familyMember]
       };
     }
 
@@ -74,7 +72,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
         isDrawDone: true
       };
 
-      newState.familyMembers.forEach((member, index) => {
+      newState.familyMembers.forEach(member => {
         findReceiver(member, newState.familyMembers);
       });
 
@@ -91,7 +89,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
 };
 
 // Could be improved to prevent "maximum call stack exceeded" with recursion
-const findReceiver = (member, familyMembers) => {
+export const findReceiver = (member, familyMembers) => {
   const receiverIndex = Math.floor(Math.random() * familyMembers.length);
   if (
     member.name === familyMembers[receiverIndex].name ||
@@ -102,11 +100,11 @@ const findReceiver = (member, familyMembers) => {
   } else {
     member.receiver = familyMembers[receiverIndex].name;
     familyMembers[receiverIndex].isAlreadyAGiver = true;
-    return member;
+    return;
   }
 };
 
-const isDrawValid = (familyLength, membersWithSpouse) => {
+export const isDrawValid = (familyLength, membersWithSpouse) => {
   if (familyLength <= 1 ||
     membersWithSpouse === 2 && familyLength === 2 ||
     familyLength === 3 && membersWithSpouse === 2
